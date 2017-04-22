@@ -1,0 +1,17 @@
+.table td, .table th {
+   text-align: center;
+   width: 25%;  
+}
+
+textarea {
+        display: block;
+}
+  .form-group  {
+        label {
+        text-align: left;
+        display: block;
+        }
+         input[type='radio'] {
+                width: 2%;
+         }
+  }

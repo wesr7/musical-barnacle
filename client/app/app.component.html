@@ -1,0 +1,18 @@
+<div class="container">
+
+	<nav class="navbar">
+    		<div class="nav navbar-nav">
+      			<a routerLink="/about" class="nav-item nav-link" routerLinkActive="active">
+        			<i class="fa fa-info-circle"></i> About
+      			</a>
+			<a *ngIf="auth.authenticated()" routerLink="/admin" class="nav-item nav-link" routerLinkActive="active">
+				<i class=""></i> Admin
+			</a>
+			       	<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()" ng-show="location == /admin">Log In</button>
+      				<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()" ng-show="location == /admin">Log Out</button>
+    		</div>
+  	</nav>
+
+  <router-outlet></router-outlet>
+
+</div>
