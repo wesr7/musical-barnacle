@@ -1,121 +1,196 @@
-<app-toast [message]="toast.message"></app-toast>
-<div class="card">
-        <h4 [hidden]="Submitted"  class="card-header">Add new product</h4>
-        <div class="card-block">
-                <form  [hidden]="Submitted" class="" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
-                        <div class="form-group form-horizontal">
-                                <label for="name" class="control-label col-sm-2">Name</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="name" formControlName="name" >
+<div class="container-fluid">       
+        <div class="row banner d-flex align-items-center">
+                <div class="col-sm-6 offset-sm-3">
+                        <h1>Do you have a million dollar idea but don't know how to achieve its potential?</h1>
+                </div>
+        </div>
+        <div class="row d-flex align-items-center">
+                <div class="col-sm-6 offset-sm-3">
+                        <button>Let us help!</button>
+                         <p>Bring your invention to the first annual Inventor Showcase and share your vision with our team of experienced marketers and product developers for the chance to make your dreams come true.</p>
+                </div>
+        </div>
+        <div class="row d-flex align-items-center" id="about-us">
+                <div class="col-sm-6 offset-sm-3">
+                         <button>About Us:</button>
+                        <p>At Golden Hippo Media, we know how to take product ideas and turn them into multi-million dollar successes. From health-boosting supplements and anti-aging skincare to innovative accessories, we put great ideas directly in front of the target audience and create lifelong brand loyalty. Our produts have been featured on national tv show and all of your favorite websites and social media plataforms to build brand awareness and drive sales.</p>
+                        <p>Is your product the next one to get the Golden Hippo touch?</p>
+                </div>
+        </div>
+        <div class="row d-flex align-items-center">
+                <div class="col-sm-6 offset-sm-3">
+                        <button>Sign Up Today!</button>
+                        <p>Event Date:<br>Event Location:</p>
+                        <p>To submit an application for the event, fill out the form below. If selected, one of our staff will reach out to your personally to schedule your time slot.</p>
+                </div>
+        </div>
+        <div class="row d-flex align-items-center" id="application">
+                <div class="col-sm-6 offset-sm-3">
+                        <button>Application</button>
+                        <form  [hidden]="Submitted" class="" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
+                                <div class="form-group row">
+                                        <label for="name" class="col-1 col-form-label-sm">Name</label>
+                                        <div class="col-11">
+                                                <input class="form-control form-control-sm" type="text" name="name" formControlName="name" >
+                                        </div>
                                 </div>
-                         </div>
-                        <div class="form-group">
-                                <label for="email" class="control-label col-sm-2">Email</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="email" name="email" formControlName="email"  min="0">
+                                <div class="form-group row">
+                                        <label for="email" class="col-1 col-form-label-sm">Email</label>
+                                        <div class="col-11">
+                                                <input class="form-control form-control-sm" type="email" name="email" formControlName="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" min="0">
+                                        </div>
+                                        <small [hidden]="email.valid || (email.pristine && !Submitted)">
+                                                Email is required and format should be <i>john@doe.com</i>.
+                                        </small>
                                 </div>
-                        </div>
-                        <div class="form-group">
-                                <label for="phone" class="control-label col-sm-2">Phone</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="phone" name="phone" formControlName="phone"  min="0">
+                                <div class="form-group row">
+                                        <label for="phone" class="col-1 col-form-label-sm">Phone</label>
+                                        <div class="col-11">
+                                                <input class="form-control form-control-sm" type="phone" name="phone" formControlName="phone"  min="0">
+                                        </div>
                                 </div>
+                                <div class="form-group row">
+                                        <label for="product_invention_name" class="col-4 col-form-label-sm">Product/Invention Name</label>
+                                        <div class="col-8">
+                                                <input type="text" name="product_invention_name" class="form-control form-control-sm" formControlName="product_invention_name" >
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="description" class="col-form-label-sm">Description of idea <small>(5,000 characters max)</small></label>
+                                        <textarea class="form-control form-control-sm" type="text" name="description" formControlName="description" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="selling_benefits_features" class="col-form-label-sm">Selling benefits and features of your product/invention</label>
+                                        <textarea class="form-control form-control-sm" type="text" name="selling_benefits_features" formControlName="selling_benefits_features" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-form-label-sm">What stage is your company in? (Choose one)</label>
+                                        <div class="form-check" *ngFor="let option of stage_company_options" >
+                                                 <label for="stage_of_company" class="form-check-label col-form-label-sm">
+                                                <input  class="form-check-input form-control-sm" type="radio" name="stage_of_company" formControlName="stage_of_company"  value="{{ option }}">
+                                                <span></span> {{ option }}</label>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="attempts_to_build_business" class="col-form-label-sm">What attempts have you made to build your business? Have you been successful?</label>
+                                        <textarea class="form-control form-control-sm" type="text" name="attempts_to_build_business" formControlName="attempts_to_build_business" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="circumstances_conceived_developed" class="col-form-label-sm">Describe the circumstances surrounding how you conceived and developed your business?</label>
+                                        <textarea class="form-control form-control-sm" type="text" name="circumstances_conceived_developed" formControlName="circumstances_conceived_developed" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="difference_in_marketplace" class="col-form-label-sm">Point of difference in the marketplace <small>(USP, 500 characters max)</small></label>
+                                        <textarea class="form-control form-control-sm" type="text" name="difference_in_marketplace" formControlName="difference_in_marketplace" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="similar_or_competing" class="col-form-label-sm">List/Describe any similar or competing products you are aware of</label>
+                                        <textarea class="form-control form-control-sm" type="text" name="similar_or_competing" formControlName="similar_or_competing" step="any"min="0"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="currently_being_sold" class="col-form-label-sm">Is your product/invention is currently being sold?</label>
+                                        <div class="form-check form-check-inline">
+                                                <label class="col-form-label-sm form-check-label">Yes <span></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="yes"></label> 
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                                <label class="col-form-label-sm form-check-label">No <span></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="no"></label>
+                                        </div>
+                                </div>
+                                <div *ngIf="currently_being_sold.value == 'yes' " class="form-group row">
+                                        <label for="being_sold_location" class="col-2 col-form-label-sm">Location:</label>
+                                        <div class="col-10">
+                                                <input type="text" name="being_sold_location" class="form-control form-control-sm" formControlName="being_sold_location">
+                                        </div>
+                                </div>
+                                <div *ngIf="currently_being_sold.value == 'yes' " class="form-group row">
+                                        <label for="being_sold_price" class="col-1 col-form-label-sm">Price:</label>
+                                        <div class="col-11">
+                                                <input type="text" name="being_sold_price" class="form-control form-control-sm" formControlName="being_sold_price">
+                                        </div>
+                                </div>
+                                <div *ngIf="currently_being_sold.value == 'yes' " class="form-group row">
+                                        <label for="units_sold_to_date" class="col-5 col-form-label-sm">Number of Units Sold to Date:</label>
+                                        <div class="col-7">
+                                                <input type="text" name="units_sold_to_date" class="form-control form-control-sm" formControlName="units_sold_to_date">
+                                        </div>
+                                </div>
+                                <div *ngIf="currently_being_sold.value == 'yes' " class="form-group row">
+                                        <label for="cost_to_manufacture" class="col-4 col-form-label-sm">Cost to Manufacture: <small>(if known)</small></label>
+                                        <div class="col-8">
+                                                <input type="text" name="cost_to_manufacture" class="form-control form-control-sm" formControlName="cost_to_manufacture">
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="prototype_prod_piece_present" class="col-form-label-sm">Do you have a prototype or final production piece available to present?</label>
+                                        <div class="form-check form-check-inline">
+                                                <label class="col-form-label-sm form-check-label">Yes <span></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="yes"></label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                                <label class="col-form-label-sm form-check-label">No <span></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="no"></label>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="patent_status" class="col-form-label-sm">Patent Status <small>(select all that apply)</small></label>
+                                        <select multiple name="patent_status" class="form-control form-control-sm" formControlName="patent_status">
+                                                <option *ngFor="let option of patent_status_options"  (click)="addToArray('patent_status', option)" [value]="option.value">{{option.display}}</option>
+                                        </select>
+                                </div>
+                                <div class="form-group">
+                                        <label label="other_protection" class="col-form-label-sm">Other Protection <small>(select all that apply)</small></label>
+                                        <select multiple name="other_protection" class="form-control form-control-sm" formControlName="other_protection" id="">
+                                                <option *ngFor="let option of other_protection_options" [value]="option.value">{{option.display}}</option>
+                                        </select>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col col-form-label-sm">Do you have a video of your product/invention?</label>
+                                        <div class="row">
+                                                <label for="video_product_invention" class="col-form-label-sm col-2">Provide Link</label>
+                                                <div class="col-10">
+                                                        <input type="text" name="video_product_invention" formControlName="video_product_invention" class="form-control form-control-sm">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col col-form-label-sm">Do you have photos of your product/invention?</label>
+                                        <div class="row">
+                                                <label for="photos_product_invention" class="col-3 col-form-label-sm">Upload Images</label>
+                                                <label for="photos_product_invention" class="col-6 custom-file">
+                                                        <input name="photos_product_invention" formControlName="photos_product_invention" type="file" id="file" class="custom-file-input">
+                                                        <span class="custom-file-control"></span>
+                                                </label>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col col-form-label-sm">Sales or marketing brochure available?</label>
+                                        <div class="row">
+                                                <label for="sales_marketing_brochure" class="col-3 col-form-label-sm">Upload Brochure</label>
+                                                 <label for="photos_product_invention" class="col-6 custom-file">
+                                                        <input name="sales_marketing_brochure" formControlName="sales_marketing_brochure" type="file" id="file" class="custom-file-input">
+                                                        <span class="custom-file-control"></span>
+                                                </label>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="convicted_felony_misdemeanor_radio" class="col-form-label-sm">Have you ever been convicted of any felony or misdemeanor?</label>
+                                        <div class="form-check form-check-inline">
+                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">Yes <span></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="yes"></label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">No <span></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="no"></label>
+                                        </div>                                        
+                                </div>  
+                                <div *ngIf="convicted_felony_misdemeanor_radio.value == 'yes' " class="form-group" >
+                                        <label for="convicted_felony_misdemeanor_description" class="col-form-label-sm">If so, explain (include date, city, state and circumstances, including the precise charges and resolution of the case.</label>
+                                        <textarea type="text" name="convicted_felony_misdemeanor_description" class="form-control form-control-sm" formControlName="convicted_felony_misdemeanor_description"></textarea>
+                                </div>
+                                <button type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-paper-plane"></i> Submit</button>
+                        </form>
+                        <div [hidden]="!Submitted" class="col-xs-12 text-center">
+                                <h1>Thanks For Your Submission!</h1>
                         </div>
-                        <div class="form-group">
-                                <label for="product_invention_name">Product/Invention Name</label>
-                                <input type="text" name="product_invention_name" class="form-control" formControlName="product_invention_name" >
-                        </div>
-                        <div class="form-group">
-                                <label for="description">Description of idea</label>
-                                <textarea class="form-control" type="text" name="description" formControlName="description" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="selling_benefits_features">Selling benefits and features of your product/invention</label>
-                                <textarea class="form-control" type="text" name="selling_benefits_features" formControlName="selling_benefits_features" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label>What stage is your company in? (Choose one)</label>
-                                <label *ngFor="let option of stage_company_options" ><input  style="display: inline-block; width: 2%;" class="form-control" type="radio" name="stage_of_company" formControlName="stage_of_company" step="any"min="0" value="{{ option }}">{{ option }}</label>
-                        </div>
-                        <div class="form-group">
-                                <label for="attempts_to_build_business">What attempts have you made to build your business? Have you been successful?</label>
-                                <textarea class="form-control" type="text" name="attempts_to_build_business" formControlName="attempts_to_build_business" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="circumstances_conceived_developed">Describe the circumstances surrounding how you conceived and developed your business?</label>
-                                <textarea class="form-control" type="text" name="circumstances_conceived_developed" formControlName="circumstances_conceived_developed" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="difference_in_marketplace">Point of difference in the marketplace</label>
-                                <small>(USP, 500 characters max)</small>
-                                <textarea class="form-control" type="text" name="difference_in_marketplace" formControlName="difference_in_marketplace" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="similar_or_competing">List/Describe any similar or competing products you are aware of</label>
-                                <textarea class="form-control" type="text" name="similar_or_competing" formControlName="similar_or_competing" step="any"min="0"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <label for="currently_being_sold">Is your product/invention is currently being sold?</label>
-                                <label>Yes</label><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-control" value="yes">
-                                <label>No</label><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-control" value="no">
-                        </div>
-                        <div *ngIf="currently_being_sold.value == 'yes' " class="form-group" >
-                                <label for="being_sold_location">Location:</label>
-                                <input type="text" name="being_sold_location" class="form-control" formControlName="being_sold_location">
-                        </div>
-                        <div *ngIf="currently_being_sold.value == 'yes' " class="form-group" >
-                                <label for="being_sold_price">Price:</label>
-                                <input type="text" name="being_sold_price" class="form-control" formControlName="being_sold_price">
-                        </div>
-                        <div *ngIf="currently_being_sold.value == 'yes' " class="form-group" >
-                                <label for="units_sold_to_date">Number of Units Sold to Date:</label>
-                                <input type="text" name="units_sold_to_date" class="form-control" formControlName="units_sold_to_date">
-                        </div>
-                        <div *ngIf="currently_being_sold.value == 'yes' " class="form-group" >
-                                <label for="cost_to_manufacture">Cost to Manufacture: <br><small>(if known)</small></label>
-                                <input type="text" name="cost_to_manufacture" class="form-control" formControlName="cost_to_manufacture">
-                        </div>
-                        <div class="form-group">
-                                <label for="prototype_prod_piece_present">Do you have a prototype or final production piece available to present?</label>
-                                <label>Yes</label><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="yes">
-                                <label>No</label><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="no">
-                        </div>
-                        <div class="form-group">
-                                <label>Patent Status</label>
-                                <label *ngFor="let option of patent_status_options" ><input  style="display: inline-block; width: 2%;" class="form-control" type="checkbox" name="patent_status" formControlName="patent_status" step="any"min="0" value="{{ option }}">{{ option }}</label>
-                        </div>
-                        <div class="form-group">
-                                <label>Other Protection</label>
-                                <label *ngFor="let option of other_protection_options" ><input  style="display: inline-block; width: 2%;" class="form-control" type="checkbox" name="other_protection" formControlName="other_protection" step="any"min="0" value="{{ option }}">{{ option }}</label>
-                        </div>
-                        <div class="form-group">
-                                <label>Do you have a video of your product/invention?</label>
-                                <label for="video_product_invention">Provide Link<input type="text" name="video_product_invention" formControlName="video_product_invention" class="form-control"></label>
-                        </div>
-                        <div class="form-group">
-                                <label>Do you have photos of your product/invention?</label>
-                                <label for="photos_product_invention">Upload Images<input type="text" name="photos_product_invention" formControlName="photos_product_invention" class="form-control"></label>
-                        </div>
-                        <div class="form-group">
-                                <label>Sales or marketing brochure available?</label>
-                                <label for="sales_marketing_brochure">Upload Brochure<input type="text" name="sales_marketing_brochure" formControlName="sales_marketing_brochure" class="form-control"></label>
-                        </div>
-                        <div class="form-group">
-                                <label for="convicted_felony_misdemeanor_radio">Have you ever been convicted of any felony or misdemeanor?</label>
-                                <input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="yes">
-                                <input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="no">
-                        </div>
-                        <div *ngIf="convicted_felony_misdemeanor_radio.value == 'yes' " class="form-group" >
-                                <label for="convicted_felony_misdemeanor_description">If so, explain (include date, city, state and circumstances, including the precise charges and resolution of the case.</label>
-                                <input type="text" name="convicted_felony_misdemeanor_description" class="form-control" formControlName="convicted_felony_misdemeanor_description">
-                        </div>
-                        {{convicted_felony_misdemeanor_radio.value}}
-                        <button class="btn btn-primary" type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
-                </form>
-                <div [hidden]="!Submitted" class="col-xs-12 text-center">
-                        <h1>Thanks For Your Submission!</h1>
                 </div>
         </div>
 </div>
+        <app-toast [message]="toast.message"></app-toast>
 
 

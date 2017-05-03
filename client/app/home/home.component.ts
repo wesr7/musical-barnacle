@@ -15,8 +15,10 @@ import { ToastComponent } from '../shared/toast/toast.component';
 export class HomeComponent implements OnInit {
 
 stage_company_options = ['Utility Filed', 'Utility Issued', 'Design Filed', 'Design Issued', 'Provisional Patent Application', 'No Patent'];
-patent_status_options = ['Utility Filed', 'Utility Issued', 'Design Filed', 'Design Issued', 'Provisional Patent Application', 'No Patent'];
-other_protection_options = ['None', 'Trademark', 'Copyright'];
+patent_status_options = [
+  {value: 'utility_filed', display: 'Utility Filed'}, {value: 'utility_issued', display: 'Utility Issued'}, {value: 'design_filed', display: 'Design Filed'}, {value: 'design_issued', display: 'Design Issued'}, {value: 'provisional_patent_app', display: 'Provisional Patent Application'}, { value: 'no_patent', display: 'No Patent'}
+  ];
+other_protection_options = [{value: 'none', display: 'None'}, {value: 'trademark', display: 'Trademark'}, {value: 'copyright', display: 'Copyright'}];
 
   products = [];
   // isLoading = true;
@@ -79,7 +81,7 @@ addProductForm: FormGroup;
       units_sold_to_date: this.units_sold_to_date,
       cost_to_manufacture: this.cost_to_manufacture,
       prototype_prod_piece_present: this.prototype_prod_piece_present,
-      patent_status: this.patent_status,
+      patent_status: [],
       other_protection: this.other_protection,
       video_product_invention: this.video_product_invention,
       photos_product_invention: this.photos_product_invention,
@@ -87,6 +89,7 @@ addProductForm: FormGroup;
       convicted_felony_misdemeanor_radio: this.convicted_felony_misdemeanor_radio,
       convicted_felony_misdemeanor_description: this.convicted_felony_misdemeanor_description
     });
+
   }
 
   getProducts() {
@@ -113,15 +116,9 @@ addProductForm: FormGroup;
       error => console.log(error)
     );
   }
-  sold(value) {
-    if (value === 'yes') {
-      this.isSold = true;
-  } else if ( value === 'no') {
-    this.isSold = false;
-  }
-    
-     console.log(value);
-    console.log('hello')
-  }
+  addToArray(formControl, value) {
+        
+        console.log(this.addProductForm.valueChanges.subscribe(data => {console.log('form changes', data)}));
+      }
  
 }

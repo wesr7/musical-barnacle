@@ -1,18 +1,36 @@
-<div class="container">
-
-	<nav class="navbar">
-    		<div class="nav navbar-nav">
-      			<a routerLink="/about" class="nav-item nav-link" routerLinkActive="active">
-        			<i class="fa fa-info-circle"></i> About
-      			</a>
-			<a *ngIf="auth.authenticated()" routerLink="/admin" class="nav-item nav-link" routerLinkActive="active">
-				<i class=""></i> Admin
-			</a>
-			       	<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()" ng-show="location == /admin">Log In</button>
-      				<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()" ng-show="location == /admin">Log Out</button>
-    		</div>
+<div class="container-fluid">
+	<nav class="navbar col-sm-6 offset-sm-3"  *ngIf="router.url !== '/admin'">
+		<ul class="nav d-flex align-items-end justify-content-end mt-auto">
+			<li class="nav-item active">
+				<a routerLink="/" routerLinkActive="active" class="nav-link" href="#">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#about-us">About Us</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#application">Application</a>
+			</li>
+		</ul>
   	</nav>
-
-  <router-outlet></router-outlet>
-
+	  <nav class="navbar col-sm-6 offset-sm-3"  *ngIf="router.url === '/admin'">
+		<ul class="nav d-flex align-items-end justify-content-end mt-auto">
+			<li class="nav-item active">
+				<a routerLink="/" routerLinkActive="active" class="nav-link" href="#">Home</a>
+			</li>
+			<li class="nav-item">
+				<a routerLink="/admin" href="#" class="nav-link">Admin</a>
+			</li>
+			<li class="nav-item">
+				<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()" ng-show="location == /admin">Log In</button>
+      				<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()" ng-show="location == /admin">Log Out</button>
+			</li>
+		</ul>
+  	</nav>
 </div>
+<router-outlet></router-outlet>
+<div class="container-fluid">
+  	<footer>
+			  
+	</footer>
+</div>
+

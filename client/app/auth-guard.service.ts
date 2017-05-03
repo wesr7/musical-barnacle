@@ -6,11 +6,11 @@ import { Auth } from './auth.service';
 
 export class AuthGuard implements CanActivate {
         constructor(private auth: Auth, private router: Router) {}
-
+        
+        isLoading;
         canActivate() {
                 if(!this.auth.authenticated()) {
-                        this.router.navigate(['']);
-                        return false;
+                        this.auth.login();
                 }
                 return true;
         }

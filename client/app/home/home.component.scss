@@ -1,17 +1,123 @@
+$custom-file-text: (
+  placeholder: (
+    en: "Choose file...",
+    es: "Seleccionar archivo..."
+  ),
+  button-label: (
+    en: "Browse",
+    es: "Navegar"
+  )
+);
+button {
+	-webkit-appearance: none;
+	background-color: #fff;
+	border: 1px solid #000;
+	padding: 8px;
+	font-weight: bold;
+	color: #000;
+}
+form {
+	text-align: unset !important;
+	margin-top: 20px;
+}
+input[type="radio"] {
+	opacity: -1;
+	transform: scale(2);
+	cursor: pointer;
+}
+input[name="stage_of_company"] {
+	margin-top: .25rem;
+    	margin-left: .25rem;
+}
+input[name="currently_being_sold"] {
+	margin-top: 0.35rem;
+	margin-left: -1rem;
+}
+input[name="prototype_prod_piece_present"] {
+	margin-top: -1rem;
+	margin-left: 2.6rem;
+}
+input[name="convicted_felony_misdemeanor_radio"] {
+	margin-top: -1rem;
+	margin-left: 3rem;
+}
+label > input[type="radio"] + span, label.form-check-label > span,  select > span {
+	display: inline-block;
+	border: 1px solid #000;
+	background-color: #ebebeb;
+	vertical-align: bottom;
+	height: 20px;
+	width: 20px;
+}
+input[type="radio"]:checked + span:after {
+	font-family: "FontAwesome";
+	content: "\f00d";
+	display: block;
+	text-align: center;
+}
+small {
+	display: block;
+    	text-align: left;
+}
+select:-internal-list-box option:checked  {
+	background-color: #fff;
+	color: #000;
+}
+textarea {
+        display: block;
+}
+
+.custom-file-control {
+	background-color: #fff !important;
+}
+.custom-file-control::before {
+	border: 1px solid #000;
+}
+.custom-file-control::before {
+	content: "Browse";
+}
+.custom-file-control::after {
+    content: "Choose file...";
+}
+.form-group  {
+        label {
+        text-align: left;
+        display: block;
+	&.col 	{
+		padding-left: 0px;
+		}
+        }
+}
+.form-check-label {
+	padding-left: 0px;
+}
+.form-control {
+	background-color: #ebebeb;
+	border-radius: 0px;
+	border: 1px solid #000;
+}
+.row.banner {
+	background-image: url('/assets/images/inventor_showcase_banner.png');
+	background-size: cover;
+	padding: 100px 0;
+	color: #fff;
+}
+.d-flex.row {
+	padding: 30px 0;
+	p 	{
+		margin: 10px 0 0;
+		padding-left: 15px;
+	}
+}
+.d-flex.row:nth-of-type(2), .d-flex.row:nth-of-type(4) {
+	background-color: #ffdc1a;
+	button {
+		background-color: #fffadd;
+	}
+}
 .table td, .table th {
    text-align: center;
    width: 25%;  
 }
 
-textarea {
-        display: block;
-}
-  .form-group  {
-        label {
-        text-align: left;
-        display: block;
-        }
-         input[type='radio'] {
-                width: 2%;
-         }
-  }
+

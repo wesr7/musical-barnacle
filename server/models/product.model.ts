@@ -18,10 +18,10 @@ const productSchema = new mongoose.Schema({
   units_sold_to_date: Number,
   cost_to_manufacture: String,
   prototype_prod_piece_present: String,
-  patent_status: [String],
+  patent_status: [{type: String}],
   other_protection: [String],
   video_product_invention: String,
-  photos_product_invention:  [{ data: Buffer, contentType: String }],
+  photos_product_invention:  String,
   sales_marketing_brochure: String,
   convicted_felony_misdemeanor_radio: String,
   convicted_felony_misdemeanor_description: String

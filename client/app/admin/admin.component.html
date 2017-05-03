@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="auth.authenticated()">
         <h4 class="card-header">Current products ({{products.length}})</h4>
         <button *ngIf="isDetails" class="btn btn-sm btn-warning" (click)="getProducts()"><i class="fa fa-pencil"></i> Details</button>
         <div class="card-block">
@@ -27,7 +27,7 @@
                                         <p><b>Name:</b> {{product.name}}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                        <p><b>Email:</b> {{product.email}</p>
+                                        <p><b>Email:</b> {{product.email}}</p>
                                 </div>
                         </div>
                         <div class="row">
@@ -124,7 +124,7 @@
                                         <p><b>Explination of felony or misdemeanor?</b> {{ product.convicted_felony_misdemeanor_description }}</p>
                                 </div>
                         </div>
-                                                </div>            
+                </div>            
                 </table>
         </div>
 </div>
