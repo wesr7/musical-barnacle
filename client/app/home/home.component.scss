@@ -1,29 +1,17 @@
-$custom-file-text: (
-  placeholder: (
-    en: "Choose file...",
-    es: "Seleccionar archivo..."
-  ),
-  button-label: (
-    en: "Browse",
-    es: "Navegar"
-  )
-);
-button {
-	-webkit-appearance: none;
-	background-color: #fff;
-	border: 1px solid #000;
-	padding: 8px;
-	font-weight: bold;
-	color: #000;
-}
 form {
 	text-align: unset !important;
 	margin-top: 20px;
+	button[type="submit"] {
+		width: 50%;
+		display: block;
+		margin: 0 auto;
+	}
 }
 input[type="radio"] {
 	opacity: -1;
 	transform: scale(2);
 	cursor: pointer;
+	color: #000;
 }
 input[name="stage_of_company"] {
 	margin-top: .25rem;
@@ -49,19 +37,18 @@ label > input[type="radio"] + span, label.form-check-label > span,  select > spa
 	height: 20px;
 	width: 20px;
 }
-input[type="radio"]:checked + span:after {
+input[type="radio"]:checked + span:after, i.fa.fa-times {
 	font-family: "FontAwesome";
 	content: "\f00d";
 	display: block;
 	text-align: center;
 }
+i.fa.fa-times {
+	margin-top: 1px;
+}
 small {
 	display: block;
     	text-align: left;
-}
-select:-internal-list-box option:checked  {
-	background-color: #fff;
-	color: #000;
 }
 textarea {
         display: block;
@@ -95,8 +82,9 @@ textarea {
 	background-color: #ebebeb;
 	border-radius: 0px;
 	border: 1px solid #000;
+	color: #000;
 }
-.row.banner {
+.d-flex.row.banner {
 	background-image: url('/assets/images/inventor_showcase_banner.png');
 	background-size: cover;
 	padding: 100px 0;

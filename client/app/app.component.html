@@ -1,6 +1,7 @@
 <div class="container-fluid">
-	<nav class="navbar col-sm-6 offset-sm-3"  *ngIf="router.url !== '/admin'">
-		<ul class="nav d-flex align-items-end justify-content-end mt-auto">
+	<nav class="navbar col-sm-6 offset-sm-3">
+		<img src="/assets/images/inventors_showcase_logo.png" alt="" class="logo">
+		<ul class="nav d-flex align-items-end justify-content-end mt-auto"  *ngIf="router.url !== '/admin'">
 			<li class="nav-item active">
 				<a routerLink="/" routerLinkActive="active" class="nav-link" href="#">Home</a>
 			</li>
@@ -11,9 +12,7 @@
 				<a class="nav-link" href="#application">Application</a>
 			</li>
 		</ul>
-  	</nav>
-	  <nav class="navbar col-sm-6 offset-sm-3"  *ngIf="router.url === '/admin'">
-		<ul class="nav d-flex align-items-end justify-content-end mt-auto">
+		<ul class="nav d-flex align-items-end justify-content-end mt-auto"  *ngIf="router.url == '/admin'">
 			<li class="nav-item active">
 				<a routerLink="/" routerLinkActive="active" class="nav-link" href="#">Home</a>
 			</li>

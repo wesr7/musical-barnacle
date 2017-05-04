@@ -1,9 +1,16 @@
 <div class="card" *ngIf="auth.authenticated()">
         <h4 class="card-header">Current products ({{products.length}})</h4>
-        <button *ngIf="isDetails" class="btn btn-sm btn-warning" (click)="getProducts()"><i class="fa fa-pencil"></i> Details</button>
+        <div class="container back-button">
+                <div class="row" *ngIf="isDetails">
+                         <div class="col-sm-3">
+                                 <button type="button" (click)="getProducts()"><i class="fa fa-angle-double-left"></i> All Products</button>
+                         </div>
+                 </div>
+        </div>
+        <!--<button *ngIf="isDetails" class="btn btn-sm btn-warning" (click)="getProducts()"><i class="fa fa-pencil"></i> Details</button>-->
         <div class="card-block">
-                <table class="table table-bordered table-striped">
-                        <thead class="thead-default" *ngIf="!isDetails">
+                <table class="table table-bordered table-striped" *ngIf="!isDetails">
+                        <thead class="thead-default">
                                 <tr>
                                         <th>Name</th>
                                         <th>Invention/Product Name</th>
@@ -11,7 +18,7 @@
                                         <th>Actions</th>
                                 </tr>
                         </thead>
-                        <tbody *ngIf="!isDetails">
+                        <tbody>
                                 <tr *ngFor="let product of products">
                                         <td>{{product.name}}</td>
                                         <td>{{product.product_invention_name}}</td>
@@ -21,110 +28,119 @@
                                          </td>
                                 </tr>
                         </tbody>
-                        <div class="wrapper" *ngIf="isDetails" >
-                        <div class="row">
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Name:</b> {{product.name}}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Email:</b> {{product.email}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Phone:</b> {{product.phone}}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Product/Invention Name:</b> {{product.product_invention_name}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Description of Idea:</b><br> {{product.description}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Selling benefits and features of your product/invention:</b><br> {{product.selling_benefits_features}}</p>
-                                </div>
-                        </div>
-                         <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>What stage is your company in?</b> {{product.stage_of_company}}</p>
-                                </div>
-                        </div>
-                         <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>What attempts have you made to build your business? Have you been successful?</b> <br> {{product.attempts_to_build_business}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Describe the circumstances surrounding how you conceived and developed your business?</b> <br> {{product.circumstances_conceived_developed}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Point of difference in the marketplace</b> <br> {{product.difference_in_marketplace}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>List/Describe any similar or competing products you are aware of</b><br> {{product.similar_or_competing}}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Is your product/invention is currently being sold?</b> {{product.currently_being_sold}}</p>
-                                </div>
-                        </div>
-                        <div class="row" *ngIf="product.currently_being_sold == 'yes' ">
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Location:</b><br> {{product.being_sold_location}}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Price:</b> {{product.being_sold_price}}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Number of Units Sold to Date:</b> {{product.units_sold_to_date}}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                        <p><b>Cost to Manufacture</b> {{ product.cost_to_manufacture }}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12 col-sm-4">
-                                        <p><b>Do you have a prototype or final production piece available to present?</b> {{ product.prototype_prod_piece_present }}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-4"><p><b>Patent Status</b> {{ product.patent_status }}</p></div>
-                                <div class="col-xs-12 col-sm-4"><p><b>Other Protection</b> {{ product.other_protection }}</p></div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Do you have a video of your product/invention?</b><br> {{product.video_product_invention }}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Do you have photos of your product/invention?</b><br> {{product.photos_product_invention }}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Sales or marketing brochure available?</b><br> {{product.sales_marketing_brochure }}</p>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="col-xs-12">
-                                        <p><b>Have you ever been convicted of any felony or misdemeanor?</b> {{product.convicted_felony_misdemeanor_radio }}</p>
-                                </div>
-                        </div>
-                        <div class="row" *ngIf="product.convicted_felony_misdemeanor_radio == 'yes' ">
-                                <div class="col-xs-12">
-                                        <p><b>Explination of felony or misdemeanor?</b> {{ product.convicted_felony_misdemeanor_description }}</p>
-                                </div>
-                        </div>
-                </div>            
                 </table>
         </div>
+         <div class="container wrapper" id="wrapper"  *ngIf="isDetails">
+                <div class="row">
+                        <div class="col-sm-6">
+                                <p><b>Name:</b> {{product.name}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                                <p><b>Email:</b> {{product.email}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-sm-6">
+                                <p><b>Phone:</b> {{product.phone}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                                <p><b>Product/Invention Name:</b> {{product.product_invention_name}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Description of Idea:</b><br> {{product.description}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Selling benefits and features of your product/invention:</b><br> {{product.selling_benefits_features}}</p>
+                        </div>
+                </div>
+                        <div class="row">
+                        <div class="col">
+                                <p><b>What stage is your company in?</b> <br>{{product.stage_of_company}}</p>
+                        </div>
+                </div>
+                        <div class="row">
+                        <div class="col">
+                                <p><b>What attempts have you made to build your business? Have you been successful?</b> <br> {{product.attempts_to_build_business}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Describe the circumstances surrounding how you conceived and developed your business?</b> <br> {{product.circumstances_conceived_developed}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Point of difference in the marketplace</b> <br> {{product.difference_in_marketplace}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>List/Describe any similar or competing products you are aware of</b><br> {{product.similar_or_competing}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Is your product/invention is currently being sold?</b><br> {{product.currently_being_sold}}</p>
+                        </div>
+                </div>
+                <div class="row" *ngIf="product.currently_being_sold == 'yes' ">
+                        <div class="col-sm-6">
+                                <p><b>Location:</b><br> {{product.being_sold_location}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                                <p><b>Price:</b><br> {{product.being_sold_price}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                                <p><b>Number of Units Sold to Date:</b><br> {{product.units_sold_to_date}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                                <p><b>Cost to Manufacture</b><br> {{ product.cost_to_manufacture }}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Do you have a prototype or final production piece available to present?</b><br> {{ product.prototype_prod_piece_present }}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-sm-6"><p><b>Patent Status:</b><br> {{ product.patent_status }}</p></div>
+                        <div class="col-sm-6"><p><b>Other Protection:</b><br> {{ product.other_protection }}</p></div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Do you have a video of your product/invention?</b><br> {{product.video_product_invention }}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Do you have photos of your product/invention?</b><br> {{product.photos_product_invention }}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Sales or marketing brochure available?</b><br> {{product.sales_marketing_brochure }}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col">
+                                <p><b>Have you ever been convicted of any felony or misdemeanor?</b><br> {{product.convicted_felony_misdemeanor_radio }}</p>
+                        </div>
+                </div>
+                <div class="row" *ngIf="product.convicted_felony_misdemeanor_radio == 'yes' ">
+                        <div class="col">
+                                <p><b>Explination of felony or misdemeanor?</b><br> {{ product.convicted_felony_misdemeanor_description }}</p>
+                        </div>
+                </div>
+        </div>
+        <div class="container" *ngIf="isDetails">
+                <div class="row">
+                        <div class="col-sm-4 offset-sm-4 text-center">
+                                <button type="button" (click)="print()"><i class="fa fa-print"></i> Print</button>
+                        </div>
+                </div>
+        </div>            
 </div>

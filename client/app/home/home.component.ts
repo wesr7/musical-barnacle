@@ -16,43 +16,39 @@ export class HomeComponent implements OnInit {
 
 stage_company_options = ['Utility Filed', 'Utility Issued', 'Design Filed', 'Design Issued', 'Provisional Patent Application', 'No Patent'];
 patent_status_options = [
-  {value: 'utility_filed', display: 'Utility Filed'}, {value: 'utility_issued', display: 'Utility Issued'}, {value: 'design_filed', display: 'Design Filed'}, {value: 'design_issued', display: 'Design Issued'}, {value: 'provisional_patent_app', display: 'Provisional Patent Application'}, { value: 'no_patent', display: 'No Patent'}
+  {value: 'Utility Filed', display: 'Utility Filed'}, {value: ' Utility Issued ', display: 'Utility Issued'}, {value: ' Design Filed', display: 'Design Filed'}, {value: ' Design Issued', display: 'Design Issued'}, {value: ' Provisional Patent Application', display: 'Provisional Patent Application'}, { value: ' No Patent', display: 'No Patent'}
   ];
-other_protection_options = [{value: 'none', display: 'None'}, {value: 'trademark', display: 'Trademark'}, {value: 'copyright', display: 'Copyright'}];
+other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark', display: 'Trademark'}, {value: 'Copyright', display: 'Copyright'}];
 
   products = [];
-  // isLoading = true;
-
   product = {};
-  isEditing = false;
-
   Submitted = false;
   isSold = false;
 
 addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   email= new FormControl('', Validators.required);
-  phone= new FormControl();
-  product_invention_name= new FormControl();
-  description = new FormControl('', Validators.required);
-  selling_benefits_features = new FormControl();
-  stage_of_company = new FormControl();
-  attempts_to_build_business = new FormControl();
-  circumstances_conceived_developed = new FormControl()
-  difference_in_marketplace= new FormControl();
-  similar_or_competing = new FormControl();
-  currently_being_sold = new FormControl();
+  phone= new FormControl('', Validators.required);
+  product_invention_name= new FormControl('', Validators.required);
+  description = new FormControl('', [Validators.required, Validators.maxLength(5000)]);
+  selling_benefits_features = new FormControl('', Validators.required);
+  stage_of_company = new FormControl('', Validators.required);
+  attempts_to_build_business = new FormControl('', Validators.required);
+  circumstances_conceived_developed = new FormControl('', Validators.required)
+  difference_in_marketplace= new FormControl('', [Validators.required, Validators.maxLength(500)]);
+  similar_or_competing = new FormControl('', Validators.required);
+  currently_being_sold = new FormControl('', Validators.required);
   being_sold_location = new FormControl();
   being_sold_price = new FormControl();
   units_sold_to_date = new FormControl();
   cost_to_manufacture = new FormControl();
-  prototype_prod_piece_present = new FormControl();
-  patent_status = new FormControl();
-  other_protection = new FormControl();
+  prototype_prod_piece_present = new FormControl('', Validators.required);
+  patent_status = new FormControl('', Validators.required);
+  other_protection = new FormControl('', Validators.required);
   video_product_invention= new FormControl();
   photos_product_invention= new FormControl();
   sales_marketing_brochure= new FormControl();
-  convicted_felony_misdemeanor_radio = new FormControl();
+  convicted_felony_misdemeanor_radio = new FormControl('', Validators.required);
   convicted_felony_misdemeanor_description = new FormControl();
 
   constructor(private http: Http,
@@ -81,7 +77,7 @@ addProductForm: FormGroup;
       units_sold_to_date: this.units_sold_to_date,
       cost_to_manufacture: this.cost_to_manufacture,
       prototype_prod_piece_present: this.prototype_prod_piece_present,
-      patent_status: [],
+      patent_status: this.patent_status,
       other_protection: this.other_protection,
       video_product_invention: this.video_product_invention,
       photos_product_invention: this.photos_product_invention,
@@ -94,15 +90,13 @@ addProductForm: FormGroup;
 
   getProducts() {
     this.dataService.getProducts().subscribe(
-      data => this.products = data,
-      // () => this.isLoading = false
+      data => this.products = data
     );
   }
 
   getProduct(product) {
     this.dataService.getProduct(product).subscribe(
-      data => this.product = data,
-      // () => this.isLoading = false
+      data => this.product = data
     )
   }
   addProduct() {
@@ -116,9 +110,5 @@ addProductForm: FormGroup;
       error => console.log(error)
     );
   }
-  addToArray(formControl, value) {
-        
-        console.log(this.addProductForm.valueChanges.subscribe(data => {console.log('form changes', data)}));
-      }
  
 }

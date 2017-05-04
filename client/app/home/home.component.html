@@ -28,40 +28,55 @@
                 <div class="col-sm-6 offset-sm-3">
                         <button>Application</button>
                         <form  [hidden]="Submitted" class="" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
-                                <div class="form-group row">
+                                <div class="form-group row has-danger">
                                         <label for="name" class="col-1 col-form-label-sm">Name</label>
                                         <div class="col-11">
-                                                <input class="form-control form-control-sm" type="text" name="name" formControlName="name" >
+                                                <input class="form-control form-control-sm" type="text" name="name" formControlName="name" required>
                                         </div>
+                                        <small class="form-control-feedback" [hidden]="name.valid || name.pristine">
+                                               Name is required.
+                                        </small>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row has-danger">
                                         <label for="email" class="col-1 col-form-label-sm">Email</label>
                                         <div class="col-11">
                                                 <input class="form-control form-control-sm" type="email" name="email" formControlName="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" min="0">
                                         </div>
-                                        <small [hidden]="email.valid || (email.pristine && !Submitted)">
+                                        <small class="form-control-feedback" [hidden]="email.valid || (email.pristine && !Submitted)">
                                                 Email is required and format should be <i>john@doe.com</i>.
                                         </small>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row has-danger">
                                         <label for="phone" class="col-1 col-form-label-sm">Phone</label>
                                         <div class="col-11">
-                                                <input class="form-control form-control-sm" type="phone" name="phone" formControlName="phone"  min="0">
+                                                <input class="form-control form-control-sm" type="phone" name="phone" formControlName="phone"  pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$" min="0">
                                         </div>
+                                        <small class="form-control-feedback" [hidden]="phone.valid || (phone.pristine && !Submitted)">
+                                               Phone number is required.
+                                        </small>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row has-danger">
                                         <label for="product_invention_name" class="col-4 col-form-label-sm">Product/Invention Name</label>
                                         <div class="col-8">
                                                 <input type="text" name="product_invention_name" class="form-control form-control-sm" formControlName="product_invention_name" >
                                         </div>
+                                         <small class="form-control-feedback" [hidden]="product_invention_name.valid || (product_invention_name.pristine && !Submitted)">
+                                               Product/Invention name is required.
+                                        </small>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group has-danger">
                                         <label for="description" class="col-form-label-sm">Description of idea <small>(5,000 characters max)</small></label>
                                         <textarea class="form-control form-control-sm" type="text" name="description" formControlName="description" step="any"min="0"></textarea>
+                                        <small class="form-control-feedback" [hidden]="description.valid || (description.pristine && !Submitted)">
+                                               Description of your idea is required.
+                                        </small>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group has-danger">
                                         <label for="selling_benefits_features" class="col-form-label-sm">Selling benefits and features of your product/invention</label>
                                         <textarea class="form-control form-control-sm" type="text" name="selling_benefits_features" formControlName="selling_benefits_features" step="any"min="0"></textarea>
+                                        <small class="form-control-feedback" [hidden]="selling_benefits_features.valid || (selling_benefits_features.pristine && !Submitted)">
+                                               This field is required.
+                                        </small>
                                 </div>
                                 <div class="form-group">
                                         <label class="col-form-label-sm">What stage is your company in? (Choose one)</label>
@@ -90,10 +105,10 @@
                                 <div class="form-group">
                                         <label for="currently_being_sold" class="col-form-label-sm">Is your product/invention is currently being sold?</label>
                                         <div class="form-check form-check-inline">
-                                                <label class="col-form-label-sm form-check-label">Yes <span></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="yes"></label> 
+                                                <label class="col-form-label-sm form-check-label">Yes <span><i *ngIf="currently_being_sold.value === 'yes'" class="fa fa-times"></i></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="yes"></label> 
                                         </div>
                                         <div class="form-check form-check-inline">
-                                                <label class="col-form-label-sm form-check-label">No <span></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="no"></label>
+                                                <label class="col-form-label-sm form-check-label">No <span><i *ngIf="currently_being_sold.value === 'no'" class="fa fa-times"></i></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="no"></label>
                                         </div>
                                 </div>
                                 <div *ngIf="currently_being_sold.value == 'yes' " class="form-group row">
@@ -121,18 +136,18 @@
                                         </div>
                                 </div>
                                 <div class="form-group">
-                                        <label for="prototype_prod_piece_present" class="col-form-label-sm">Do you have a prototype or final production piece available to present?</label>
+                                        <label class="col-form-label-sm">Do you have a prototype or final production piece available to present?</label>
                                         <div class="form-check form-check-inline">
-                                                <label class="col-form-label-sm form-check-label">Yes <span></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="yes"></label>
+                                                <label for="prototype_prod_piece_present" class="col-form-label-sm form-check-label">Yes <span><i *ngIf="prototype_prod_piece_present.value === 'yes'" class="fa fa-times"></i></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="yes"></label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                                <label class="col-form-label-sm form-check-label">No <span></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="no"></label>
+                                                <label for="prototype_prod_piece_present" class="col-form-label-sm form-check-label">No <span><i *ngIf="prototype_prod_piece_present.value === 'no'" class="fa fa-times"></i></span><input type="radio" name="prototype_prod_piece_present" formControlName="prototype_prod_piece_present" class="form-control" value="no"></label>
                                         </div>
                                 </div>
                                 <div class="form-group">
                                         <label for="patent_status" class="col-form-label-sm">Patent Status <small>(select all that apply)</small></label>
                                         <select multiple name="patent_status" class="form-control form-control-sm" formControlName="patent_status">
-                                                <option *ngFor="let option of patent_status_options"  (click)="addToArray('patent_status', option)" [value]="option.value">{{option.display}}</option>
+                                                <option *ngFor="let option of patent_status_options"  [value]="option.value">{{option.display}}</option>
                                         </select>
                                 </div>
                                 <div class="form-group">
@@ -173,10 +188,10 @@
                                 <div class="form-group">
                                         <label for="convicted_felony_misdemeanor_radio" class="col-form-label-sm">Have you ever been convicted of any felony or misdemeanor?</label>
                                         <div class="form-check form-check-inline">
-                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">Yes <span></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="yes"></label>
+                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">Yes <span><i *ngIf="convicted_felony_misdemeanor_radio.value === 'yes'" class="fa fa-times"></i></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="yes"></label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">No <span></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="no"></label>
+                                                <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">No <span><i *ngIf="convicted_felony_misdemeanor_radio.value === 'no'" class="fa fa-times"></i></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="no"></label>
                                         </div>                                        
                                 </div>  
                                 <div *ngIf="convicted_felony_misdemeanor_radio.value == 'yes' " class="form-group" >

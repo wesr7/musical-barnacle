@@ -1,10 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+body, button, input, optgroup, select, textarea{
+  font-family: filson-soft, sans-serif;
+}
+button {
+	-webkit-appearance: none;
+	background-color: #fff;
+	border: 1px solid #000;
+	padding: 8px;
+	font-weight: bold;
+	color: #000;
+}
+button[type="submit"], button[type="button"] {
+	cursor: pointer;
+}
 .navbar {
-  height: 100px;
-  a {
-    color: #000;
-  }
-  .form-group label {
-    text-align: left !important;
-  }
+  	height: 100px;
+  	a 	{
+    		color: #000;
+  	}
+  	.form-group label {
+    		text-align: left !important;
+  	}
 }

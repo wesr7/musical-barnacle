@@ -1,3 +1,11 @@
-  .form-group label {
-    text-align: left !important;
-  }
+.form-group label {
+	text-align: left !important;
+}
+.logo {
+	max-width: 175px;
+	height: auto;
+	z-index: 10;
+	position: absolute;
+  	top: 27px;
+  	left: 8px;
+}
