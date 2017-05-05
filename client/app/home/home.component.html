@@ -1,4 +1,4 @@
-<div class="container-fluid">       
+<div class="container-fluid">
         <div class="row banner d-flex align-items-center">
                 <div class="col-sm-6 offset-sm-3">
                         <h1>Do you have a million dollar idea but don't know how to achieve its potential?</h1>
@@ -105,7 +105,7 @@
                                 <div class="form-group">
                                         <label for="currently_being_sold" class="col-form-label-sm">Is your product/invention is currently being sold?</label>
                                         <div class="form-check form-check-inline">
-                                                <label class="col-form-label-sm form-check-label">Yes <span><i *ngIf="currently_being_sold.value === 'yes'" class="fa fa-times"></i></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="yes"></label> 
+                                                <label class="col-form-label-sm form-check-label">Yes <span><i *ngIf="currently_being_sold.value === 'yes'" class="fa fa-times"></i></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="yes"></label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                                 <label class="col-form-label-sm form-check-label">No <span><i *ngIf="currently_being_sold.value === 'no'" class="fa fa-times"></i></span><input type="radio" name="currently_being_sold" formControlName="currently_being_sold" class="form-check-input" value="no"></label>
@@ -189,8 +189,8 @@
                                         </div>
                                         <div class="form-check form-check-inline">
                                                 <label for="convicted_felony_misdemeanor_radio" class="form-check-label col-form-label-sm">No <span><i *ngIf="convicted_felony_misdemeanor_radio.value === 'no'" class="fa fa-times"></i></span><input type="radio" name="convicted_felony_misdemeanor_radio" formControlName="convicted_felony_misdemeanor_radio" class="form-control" value="no"></label>
-                                        </div>                                        
-                                </div>  
+                                        </div>
+                                </div>
                                 <div *ngIf="convicted_felony_misdemeanor_radio.value == 'yes' " class="form-group" >
                                         <label for="convicted_felony_misdemeanor_description" class="col-form-label-sm">If so, explain (include date, city, state and circumstances, including the precise charges and resolution of the case.</label>
                                         <textarea type="text" name="convicted_felony_misdemeanor_description" class="form-control form-control-sm" formControlName="convicted_felony_misdemeanor_description"></textarea>

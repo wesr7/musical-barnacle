@@ -118,7 +118,8 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   inputChange(input) {
     const files = (<HTMLInputElement>document.getElementById(input)).files;
     const file = files[0]
+    this.dataService.getSignedRequest(file);
     console.log(file);
   }
- 
+
 }

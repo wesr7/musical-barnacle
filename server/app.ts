@@ -4,6 +4,7 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as cors from 'cors';
+import * as aws from 'aws-sdk';
 
 import config from './config/db';
 import Product from './models/product.model';
