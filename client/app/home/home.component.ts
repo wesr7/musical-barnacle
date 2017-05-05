@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Http } from '@angular/http';
 import { Auth } from '../auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -24,8 +24,9 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   product = {};
   Submitted = false;
   isSold = false;
+  changeLog;
 
-addProductForm: FormGroup;
+  addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
   email= new FormControl('', Validators.required);
   phone= new FormControl('', Validators.required);
@@ -57,6 +58,7 @@ addProductForm: FormGroup;
               private formBuilder: FormBuilder,
               private auth: Auth) { }
 
+
   ngOnInit() {
 
     this.addProductForm = this.formBuilder.group({
@@ -86,7 +88,9 @@ addProductForm: FormGroup;
       convicted_felony_misdemeanor_description: this.convicted_felony_misdemeanor_description
     });
 
+
   }
+
 
   getProducts() {
     this.dataService.getProducts().subscribe(
@@ -109,6 +113,12 @@ addProductForm: FormGroup;
       },
       error => console.log(error)
     );
+  }
+
+  inputChange(input) {
+    const files = (<HTMLInputElement>document.getElementById(input)).files;
+    const file = files[0]
+    console.log(file);
   }
  
 }

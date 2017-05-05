@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
   patent_status: [{type: String}],
   other_protection: [String],
   video_product_invention: String,
-  photos_product_invention:  String,
+  photos_product_invention:  [String],
   sales_marketing_brochure: String,
   convicted_felony_misdemeanor_radio: String,
   convicted_felony_misdemeanor_description: String

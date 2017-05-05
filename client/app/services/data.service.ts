@@ -36,4 +36,13 @@ export class DataService {
   deleteProduct(product): Observable<any> {
     return this.http.delete(`/api/product/${product._id}`, this.options);
   }
+  getSignedRequest(file): Observable<any> {
+    return this.http.get(`/sign-s3?file-name=${file.name}&file-type=$file.type}`).map(res => {
+      let response = res.json();
+      this.uploadFile(file, response.signedRequest, response.url);
+    });
+  }
+    uploadFile(signedRequest, file,  url): Observable<any> {
+      return this.http.put(signedRequest, file, url);
+    }
 }
