@@ -12,8 +12,9 @@ export class DataService {
 
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
+
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 
@@ -43,11 +44,14 @@ export class DataService {
     return this.http.delete(`/api/product/${product._id}`, this.options);
   }
   getSignedRequest(file): Promise<any> {
-    return this.http.get(`/api/sign-s3?file-name=${file.name}&file-type=${file.type}`)
+    console.log('sign', typeof file);
+
+    return this.http.get(`/api/sign-s3?file-name=${file.name}&file-type=${file.type}`, file)
     .toPromise()
     .then(res => {
       let response = res.json()
-      this.uploadFile(response.signedRequest, file)
+      console.log(response);
+      // this.uploadFile(response.signedRequest, file)
     })
    .catch(this.handleError);
   }
