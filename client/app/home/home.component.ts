@@ -25,6 +25,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   Submitted = false;
   isSold = false;
   changeLog;
+  myArray = [];
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -82,15 +83,12 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
       patent_status: this.patent_status,
       other_protection: this.other_protection,
       video_product_invention: this.video_product_invention,
-      photos_product_invention: this.photos_product_invention,
+      photos_product_invention: [],
       sales_marketing_brochure: this.sales_marketing_brochure,
       convicted_felony_misdemeanor_radio: this.convicted_felony_misdemeanor_radio,
       convicted_felony_misdemeanor_description: this.convicted_felony_misdemeanor_description
     });
-
-
   }
-
 
   getProducts() {
     this.dataService.getProducts().subscribe(
@@ -104,6 +102,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
     )
   }
   addProduct() {
+    this.addProductForm.patchValue({photos_product_invention: this.myArray});
     this.dataService.addProduct(this.addProductForm.value).subscribe(
       res => {
         const newProduct = res.json();
@@ -118,8 +117,39 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   inputChange(input) {
     const files = (<HTMLInputElement>document.getElementById(input)).files;
     const file = files[0]
-    // this.dataService.getSignedRequest(file);
-    console.log('home', JSON.stringify(file));
+    this.getSignedRequest(file);
   }
-
+  getSignedRequest(file){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/api/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          const response = JSON.parse(xhr.responseText);
+          this.uploadFile(file, response.signedRequest, response.url);
+        }
+        else{
+          alert('Could not get signed URL.');
+        }
+      }
+    };
+    xhr.send();
+  }
+  uploadFile(file, signedRequest, url){
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', signedRequest);
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4){
+          if(xhr.status === 200){
+            this.myArray.push(url)
+            console.log(this.myArray);
+            console.log(this.addProductForm.value);
+          }
+          else{
+            alert('Could not upload file.');
+          }
+        }
+      };
+      xhr.send(file);
+    }
 }

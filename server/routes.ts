@@ -23,45 +23,33 @@ export default function setRoutes(app) {
   app.route('/api/product/:id').put(products.update);
   app.route('/api/product/:id').delete(products.delete);
   app.route('/api/sign-s3').get((req, res) => {
-      const s3 = new aws.S3({endpoint: 's3-us-west-1.amazonaws.com/', signatureVersion: 'v4'});
-      s3.endpoint.hostname = 's3-us-west-1.amazonaws.com/';
+      const s3 = new aws.S3({endpoint: 's3-us-west-1.amazonaws.com'});
+      s3.endpoint.hostname = 's3-us-west-1.amazonaws.com';
       s3.config.update({region: 'us-west-1'});
       console.log(s3);
-      console.log(req);
+      console.log(req.body);
       const fileName = req.query['file-name'];
       const fileType = req.query['file-type'];
       const file = req.query['file'];
       const s3Params = {
         Bucket: S3_BUCKET,
         Key: fileName,
-        Expires: 10000,
+        ACL: 'public-read',
         ContentType: fileType,
-        ACL: 'public-read'
-      };
+        Expires: 10000
+              };
 
       s3.getSignedUrl('putObject', s3Params, (err, data) => {
         if(err){
           console.log(err);
           return res.end();
         }
-        console.log(data);
         const returnData = {
           signedRequest: data,
-          url: `https://s3-us-west-1.amazonaws.com/${S3_BUCKET}/${fileName}`
+          url: `https://${S3_BUCKET}.s3-us-west-1.amazonaws.com/${fileName}`
         };
         res.write(JSON.stringify(returnData));
         res.end();
-      });
-
-      s3.upload({
-        Bucket: S3_BUCKET,
-        Key: fileName,
-        Body: file,
-        ContentType: fileType,
-        ACL: 'public-read'
-      }, function(err, data) {
-        console.log(file);
-        console.log(err, data);
       });
     });
 }

@@ -169,7 +169,8 @@
                                         <label class="col col-form-label-sm">Do you have photos of your product/invention?</label>
                                         <div class="row">
                                                 <label for="photos_product_invention" class="col-3 col-form-label-sm">Upload Images</label>
-                                                <input type="file" name="photos_product_invention" formControlName="photos_product_invention" (change)="inputChange('photos_product_invention')" id="photos_product_invention" multiple>
+                                                <input type="file"  (change)="inputChange('file-picker')" id="file-picker" multiple>
+                                                <input type="text" style="display:none;" name="photos_product_invention"  id="photos_product_invention" formControlName="photos_product_invention" >
                                         </div>
                                 </div>
                                 <div class="form-group">

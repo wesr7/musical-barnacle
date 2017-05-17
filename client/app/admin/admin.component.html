@@ -24,7 +24,7 @@
                                         <td>{{product.product_invention_name}}</td>
                                         <td>{{product.description}}</td>
                                         <td>
-                                                <button class="btn btn-sm btn-warning" (click)="getProduct(product)"><i class="fa fa-pencil"></i> Details</button>           
+                                                <button class="btn btn-sm btn-warning" (click)="getProduct(product)"><i class="fa fa-pencil"></i> Details</button>
                                          </td>
                                 </tr>
                         </tbody>
@@ -117,7 +117,9 @@
                 </div>
                 <div class="row">
                         <div class="col">
-                                <p><b>Do you have photos of your product/invention?</b><br> {{product.photos_product_invention }}</p>
+                                <p><b>Do you have photos of your product/invention?</b>
+                                <br>
+                                <a *ngFor="let image of product.photos_product_invention; let i = index;" href="{{ image }}" target="_blank">Image {{ i + 1 }} </a></p>
                         </div>
                 </div>
                 <div class="row">
@@ -142,5 +144,5 @@
                                 <button type="button" (click)="print()"><i class="fa fa-print"></i> Print</button>
                         </div>
                 </div>
-        </div>            
+        </div>
 </div>
