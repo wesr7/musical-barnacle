@@ -117,9 +117,23 @@
                 </div>
                 <div class="row">
                         <div class="col">
-                                <p><b>Do you have photos of your product/invention?</b>
-                                <br>
-                                <a *ngFor="let image of product.photos_product_invention; let i = index;" href="{{ image }}" target="_blank">Image {{ i + 1 }} </a></p>
+                            <p><b>Do you have photos of your product/invention?</b>
+                            <br>
+                            <a *ngFor="let image of product.photos_product_invention;"  (click)="modalShow($event)"><img src="{{ image }}" class="img-thumbnail" /></a></p>
+                            <div id="myModal" class="modal fade">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img id="modalImg" class="mx-auto d-block img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                 </div>
                 <div class="row">

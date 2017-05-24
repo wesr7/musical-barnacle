@@ -4,6 +4,8 @@ import { Auth } from '../auth.service';
 
 import { DataService } from '../services/data.service';
 
+declare var jQuery:any;
+
 @Component({
         selector: 'admin-panel',
         templateUrl: './admin.component.html',
@@ -47,6 +49,10 @@ export class AdminComponent implements OnInit {
                 WinPrint.focus();
                 WinPrint.print();
                 WinPrint.close();
+        }
+        modalShow(event) {
+            (<HTMLInputElement>document.getElementById('modalImg')).src = event.target.currentSrc;
+            jQuery('#myModal').modal('show');
         }
 
 
