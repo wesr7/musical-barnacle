@@ -27,7 +27,7 @@
         <div class="row d-flex align-items-center" id="application">
                 <div class="col-sm-6 offset-sm-3">
                         <button>Application</button>
-                        <form  [hidden]="Submitted" class="" [formGroup]="addProductForm" (ngSubmit)="addProduct()" style="text-align:center">
+                        <form [hidden]="Submitted" class="" [formGroup]="addProductForm" (ngSubmit)="addProduct()">
                                 <div class="form-group row has-danger">
                                         <label for="name" class="col-1 col-form-label-sm">Name</label>
                                         <div class="col-11">
@@ -176,11 +176,10 @@
                                 <div class="form-group">
                                         <label class="col col-form-label-sm">Sales or marketing brochure available?</label>
                                         <div class="row">
-                                                <label for="sales_marketing_brochure" class="col-3 col-form-label-sm">Upload Brochure</label>
-                                                 <label for="photos_product_invention" class="col-6 custom-file">
-                                                        <input name="sales_marketing_brochure" formControlName="sales_marketing_brochure" type="file" id="file" class="custom-file-input">
-                                                        <span class="custom-file-control"></span>
-                                                </label>
+                                            <label for="sales_marketing_brochure" class="col-3 col-form-label-sm">Upload Brochure</label>
+                                            <input type="file"  (change)="inputChange('file-picker')" id="file-picker">
+                                            <input style="display:none;" name="sales_marketing_brochure" formControlName="sales_marketing_brochure" type="text">
+
                                         </div>
                                 </div>
                                 <div class="form-group">
@@ -196,6 +195,7 @@
                                         <label for="convicted_felony_misdemeanor_description" class="col-form-label-sm">If so, explain (include date, city, state and circumstances, including the precise charges and resolution of the case.</label>
                                         <textarea type="text" name="convicted_felony_misdemeanor_description" class="form-control form-control-sm" formControlName="convicted_felony_misdemeanor_description"></textarea>
                                 </div>
+                                <re-captcha (resolved)="resolved($event)" required name="captcha" formControlName="captcha" siteKey="6Ld63iIUAAAAAEgGc2BlIq4OZmQeZW2znB6LVcZl"></re-captcha>
                                 <button type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-paper-plane"></i> Submit</button>
                         </form>
                         <div [hidden]="!Submitted" class="col-xs-12 text-center">

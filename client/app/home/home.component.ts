@@ -6,6 +6,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { DataService } from '../services/data.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 
+export interface FormModel {
+  captcha?: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -25,7 +28,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   Submitted = false;
   isSold = false;
   changeLog;
-  myArray = [];
+  imagesArray = [];
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -52,6 +55,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   sales_marketing_brochure= new FormControl();
   convicted_felony_misdemeanor_radio = new FormControl('', Validators.required);
   convicted_felony_misdemeanor_description = new FormControl();
+  captcha = new FormControl('', Validators.required);
 
   constructor(private http: Http,
               private dataService: DataService,
@@ -84,9 +88,10 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
       other_protection: this.other_protection,
       video_product_invention: this.video_product_invention,
       photos_product_invention: [],
-      sales_marketing_brochure: this.sales_marketing_brochure,
+      sales_marketing_brochure: '',
       convicted_felony_misdemeanor_radio: this.convicted_felony_misdemeanor_radio,
-      convicted_felony_misdemeanor_description: this.convicted_felony_misdemeanor_description
+      convicted_felony_misdemeanor_description: this.convicted_felony_misdemeanor_description,
+      captcha: ''
     });
   }
 
@@ -102,7 +107,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
     )
   }
   addProduct() {
-    this.addProductForm.patchValue({photos_product_invention: this.myArray});
+    this.addProductForm.patchValue({photos_product_invention: this.imagesArray});
     this.dataService.addProduct(this.addProductForm.value).subscribe(
       res => {
         const newProduct = res.json();
@@ -119,6 +124,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
     const file = files[0]
     this.getSignedRequest(file);
   }
+
   getSignedRequest(file){
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/api/sign-s3?file-name=${file.name}&file-type=${file.type}`);
@@ -135,15 +141,18 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
     };
     xhr.send();
   }
+
   uploadFile(file, signedRequest, url){
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', signedRequest);
       xhr.onreadystatechange = () => {
         if(xhr.readyState === 4){
           if(xhr.status === 200){
-            this.myArray.push(url)
-            console.log(this.myArray);
-            console.log(this.addProductForm.value);
+            if(file.type == 'image/jpeg') {
+              this.imagesArray.push(url)
+            } else if(file.type =='application/pdf') {
+              this.addProductForm.patchValue({sales_marketing_brochure: url});
+            }
           }
           else{
             alert('Could not upload file.');
@@ -151,5 +160,8 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
         }
       };
       xhr.send(file);
+    }
+     resolved(captchaResponse: string) {
+        console.log(`Resolved captcha with response ${captchaResponse}:`);
     }
 }

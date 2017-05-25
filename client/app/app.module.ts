@@ -1,5 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Auth } from './auth.service';
@@ -26,7 +28,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   imports: [
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaFormsModule,
+
   ],
   providers: [
     appRoutingProviders,

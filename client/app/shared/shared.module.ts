@@ -10,7 +10,7 @@ import { ToastComponent } from './toast/toast.component';
        BrowserModule,
        FormsModule,
        ReactiveFormsModule,
-       HttpModule
+       HttpModule,
    ],
    exports: [
        // Shared Modules
