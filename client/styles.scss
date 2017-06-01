@@ -9,6 +9,7 @@ button {
 	padding: 8px;
 	font-weight: bold;
 	color: #000;
+	cursor: pointer
 }
 button[type="submit"], button[type="button"] {
 	cursor: pointer;
@@ -21,4 +22,10 @@ button[type="submit"], button[type="button"] {
   	.form-group label {
     		text-align: left !important;
   	}
+}
+.img-thumbnail {
+    max-width: 100px;
+    height: auto;
+    margin-right: 5px;
+    cursor: pointer;
 }

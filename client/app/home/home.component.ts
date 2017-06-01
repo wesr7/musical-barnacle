@@ -29,6 +29,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   isSold = false;
   changeLog;
   imagesArray = [];
+  imagePicked = false;
 
   addProductForm: FormGroup;
   name = new FormControl('', Validators.required);
@@ -148,10 +149,12 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
       xhr.onreadystatechange = () => {
         if(xhr.readyState === 4){
           if(xhr.status === 200){
-            if(file.type == 'image/jpeg') {
-              this.imagesArray.push(url)
-            } else if(file.type =='application/pdf') {
+            if(file.type.split('/')[0] == 'application') {
               this.addProductForm.patchValue({sales_marketing_brochure: url});
+            } else if(file.type.split('/')[0] == 'image') {
+              this.imagesArray.push(url)
+              this.imagePicked = true;
+              console.log(this.imagesArray)
             }
           }
           else{
