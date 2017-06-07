@@ -123,48 +123,20 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
   inputChange(input) {
     const files = (<HTMLInputElement>document.getElementById(input)).files;
     const file = files[0]
-    this.getSignedRequest(file);
+    this.dataService.getSignedRequest(file)
+    .then(response => {
+      this.dataService.uploadFile(file, response.signedRequest, response.url)
+      .then(url => {
+        if (file.type.split('/')[0] == 'application'){
+          this.addProductForm.patchValue({sales_marketing_brochure: url});
+        } else if (file.type.split('/')[0] == 'image') {
+          this.imagesArray.push(url)
+          this.imagePicked = true;
+        }
+      });
+    });
   }
-
-  getSignedRequest(file){
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/api/sign-s3?file-name=${file.name}&file-type=${file.type}`);
-    xhr.onreadystatechange = () => {
-      if(xhr.readyState === 4){
-        if(xhr.status === 200){
-          const response = JSON.parse(xhr.responseText);
-          this.uploadFile(file, response.signedRequest, response.url);
-        }
-        else{
-          alert('Could not get signed URL.');
-        }
-      }
-    };
-    xhr.send();
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response ${captchaResponse}:`);
   }
-
-  uploadFile(file, signedRequest, url){
-      const xhr = new XMLHttpRequest();
-      xhr.open('PUT', signedRequest);
-      xhr.onreadystatechange = () => {
-        if(xhr.readyState === 4){
-          if(xhr.status === 200){
-            if(file.type.split('/')[0] == 'application') {
-              this.addProductForm.patchValue({sales_marketing_brochure: url});
-            } else if(file.type.split('/')[0] == 'image') {
-              this.imagesArray.push(url)
-              this.imagePicked = true;
-              console.log(this.imagesArray)
-            }
-          }
-          else{
-            alert('Could not upload file.');
-          }
-        }
-      };
-      xhr.send(file);
-    }
-     resolved(captchaResponse: string) {
-        console.log(`Resolved captcha with response ${captchaResponse}:`);
-    }
 }
