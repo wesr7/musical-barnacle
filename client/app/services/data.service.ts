@@ -44,7 +44,6 @@ export class DataService {
     return this.http.delete(`/api/product/${product._id}`, this.options);
   }
   getSignedRequest(file): Promise<any> {
-    console.log('hello')
     return this.http.get(`/api/sign-s3?file-name=${file.name}&file-type=${file.type}`)
     .toPromise()
     .then(response => response.json())

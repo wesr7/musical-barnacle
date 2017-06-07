@@ -26,8 +26,6 @@ export default function setRoutes(app) {
       const s3 = new aws.S3({endpoint: 's3-us-west-1.amazonaws.com'});
       s3.endpoint.hostname = 's3-us-west-1.amazonaws.com';
       s3.config.update({region: 'us-west-1'});
-      console.log(s3);
-      console.log(req.body);
       const fileName = req.query['file-name'];
       const fileType = req.query['file-type'];
       const file = req.query['file'];
