@@ -167,4 +167,7 @@ other_protection_options = [{value: 'None', display: 'None'}, {value: 'Trademark
      resolved(captchaResponse: string) {
         console.log(`Resolved captcha with response ${captchaResponse}:`);
     }
+    checkEvent(event) {
+      console.log(event);
+    }
 }

@@ -1,10 +1,10 @@
 import * as mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  product_invention_name: String,
+  name: {type: String, required: true},
+  email: {type: String, required: true},
+  phone: {type: String, required: true},
+  product_invention_name: {type: String, required: true},
   description: String,
   selling_benefits_features: String,
   stage_of_company: String,

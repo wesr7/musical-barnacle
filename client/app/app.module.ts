@@ -31,7 +31,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SharedModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
-
   ],
   providers: [
     appRoutingProviders,

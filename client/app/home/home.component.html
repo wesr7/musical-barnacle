@@ -197,7 +197,7 @@
                                         <textarea type="text" name="convicted_felony_misdemeanor_description" class="form-control form-control-sm" formControlName="convicted_felony_misdemeanor_description"></textarea>
                                 </div>
                                 <re-captcha (resolved)="resolved($event)" required name="captcha" formControlName="captcha" siteKey="6Ld63iIUAAAAAEgGc2BlIq4OZmQeZW2znB6LVcZl"></re-captcha>
-                                <button type="submit" [disabled]="!addProductForm.valid"><i class="fa fa-paper-plane"></i> Submit</button>
+                                <button type="submit" [disabled]="!addProductForm.valid" (click)="checkEvent($event)"><i class="fa fa-paper-plane"></i> Submit</button>
                         </form>
                         <div [hidden]="!Submitted" class="col-xs-12 text-center">
                                 <h1>Thanks For Your Submission!</h1>

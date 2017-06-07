@@ -22,7 +22,10 @@ abstract class BaseCtrl {
   insert = (req, res) => {
     const obj = new this.model(req.body);
     obj.save((err, item) => {
-      if (err) { return console.error(err); }
+      if (err) { 
+        console.log(res.statusCode);
+        return console.error(err); 
+      }
       res.status(200).json(item);
     });
   };
